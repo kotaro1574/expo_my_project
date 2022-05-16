@@ -1,0 +1,15 @@
+overwrite: true
+schema: 'https://graphql-pokemon2.vercel.app'
+documents: 'src/**/*.graphql'
+generates:
+  src/libs/graphql/$types.ts:
+    plugins:
+      - 'typescript'
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generate.graphql.ts
+      baseTypesPath: libs/graphql/$types.ts
+    plugins:
+      - 'typescript-operations'
+      - 'typed-document-node'
