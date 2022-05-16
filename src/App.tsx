@@ -5,6 +5,7 @@ import { NativeBaseProvider } from 'native-base'
 import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import Navigation from './navigation'
+import { ApolloProvider } from '@src/libs/apollo'
 
 export default function App() {
   const isLoadingComplete = useCachedResources()
@@ -14,12 +15,14 @@ export default function App() {
     return null
   } else {
     return (
-      <NativeBaseProvider>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
-      </NativeBaseProvider>
+      <ApolloProvider>
+        <NativeBaseProvider>
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SafeAreaProvider>
+        </NativeBaseProvider>
+      </ApolloProvider>
     )
   }
 }

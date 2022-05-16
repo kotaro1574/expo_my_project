@@ -1,13 +1,21 @@
 import { StyleSheet } from 'react-native'
 import { RootTabScreenProps } from '../../types'
-import { Center, Text } from 'native-base'
+import { Center, Text, Image } from 'native-base'
+import { useQuery } from '@apollo/client'
+import { PokemonDocument } from '@src/libs/graphql/pokemon.generate.graphql'
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  const { data } = useQuery(PokemonDocument)
+  console.log(data)
+
   return (
     <Center flex={1}>
-      <Text>I'm Kotaro</Text>
+      {data && data.pokemon && data.pokemon.image && (
+        <Image source={{ uri: data.pokemon.image }} width={100} height={100} />
+      )}
+      <Text>{data?.pokemon?.name}</Text>
     </Center>
   )
 }
