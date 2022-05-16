@@ -8,7 +8,6 @@ export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   const { data } = useQuery(PokemonDocument)
-  console.log(data)
 
   return (
     <Center flex={1}>
